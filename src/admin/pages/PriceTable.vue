@@ -69,7 +69,7 @@ export default {
 
     async fetchCategories() {
       const data = await AJAX.get("category/all");
-      this.categories = data.filter((item)=> !item.isHidden )
+      this.categories = data.filter((item)=> !item.isHidden ).sort((a, b) => a.order - b.order);
     },
 
     async fetchAndProcessProducts() {
@@ -104,7 +104,7 @@ export default {
             if (product.priceBuy)
               product.priceBuy = ToPersianMoney(product.priceBuy);
             return product;
-          });
+          }).sort((a, b) => a.order - b.order);
   
         this.products = {...this.products, [category.id]: processedProducts};
       })

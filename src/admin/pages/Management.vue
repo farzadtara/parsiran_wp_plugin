@@ -138,7 +138,6 @@ function onUpdateProduct(params) {
 }
 
 async function handleOrderUpdate(newList) {
-  console.log('newList :>> ', newList);
   const payload = newList.map((item, index) => (
     {
       id: item.id,
