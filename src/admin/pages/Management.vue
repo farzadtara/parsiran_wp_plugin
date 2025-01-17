@@ -35,6 +35,7 @@
                       <coreManagementTable
                         :products="currentProducts"
                         @update="onUpdateProduct"
+                        @update:order="handleOrderUpdate"
                         @delete="onDeleteProduct"
                         @visibility="onViabilityProduct"
                         @ability="onAbilityProduct"
@@ -134,6 +135,18 @@ function onUpdateProduct(params) {
   nextTick(() => {
     showModel();
   });
+}
+
+async function handleOrderUpdate(newList) {
+  console.log('newList :>> ', newList);
+  const payload = newList.map((item, index) => (
+    {
+      id: item.id,
+      order: item.order,
+    }
+  ))
+
+  await AJAX.put("product/order", payload );
 }
 
 function onCreateNewItem() {

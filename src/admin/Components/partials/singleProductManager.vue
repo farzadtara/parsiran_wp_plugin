@@ -1,10 +1,4 @@
 <template>
-  <!-- <div>
-    <ProductForm/>
-  </div> -->
-  <div>
-    {{ props.initValue }}
-  </div>
   <div v-if="isShoeModal">
     <div
       class="fixed z-10 overflow-y-auto top-0 w-full left-0"
