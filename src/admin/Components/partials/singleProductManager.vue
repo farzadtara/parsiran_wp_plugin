@@ -80,10 +80,10 @@
               </div>
               <div class="my-6">
 
-                <singleProductCategoryManagement
+                <!-- <singleProductCategoryManagement
                   :categories="props.categories"
                   :productCategory="props.initValue.categories"
-                />
+                /> -->
 
               </div>
               <div class="flex items-start space-x-3 py-6">
