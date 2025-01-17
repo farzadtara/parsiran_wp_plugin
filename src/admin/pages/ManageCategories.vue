@@ -54,24 +54,24 @@
             <!-- <td class="px-6 py-4 whitespace-nowrap" v-if="editingItem?.id !== item.id">
               {{ item.role }}
             </td> -->
-            <!-- <td class="px-6 py-4 whitespace-nowrap" v-if="editingItem?.id === item.id">
+            <td class="px-6 py-4 whitespace-nowrap" v-if="editingItem?.id === category.id">
               <input
                 v-model="editingItem.name"
                 class="border rounded px-2 py-1 w-full"
               />
             </td>
-            <td class="px-6 py-4 whitespace-nowrap" v-if="editingItem?.id === item.id">
+            <!-- <td class="px-6 py-4 whitespace-nowrap" v-if="editingItem?.id === item.id">
               <input
                 v-model="editingItem.email"
                 class="border rounded px-2 py-1 w-full"
               />
             </td> -->
-            <td class="px-6 py-4 whitespace-nowrap" v-if="editingItem?.id === category.id">
+            <!-- <td class="px-6 py-4 whitespace-nowrap" v-if="editingItem?.id === category.id">
               <input
                 v-model="editingItem.role"
                 class="border rounded px-2 py-1 w-full"
               />
-            </td>
+            </td> -->
             <td class="px-6 py-4 whitespace-nowrap">
               <div class="flex justify-center space-x-2">
                 <template v-if="editingItem?.id === category.id">
