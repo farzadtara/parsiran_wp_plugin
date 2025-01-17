@@ -1,6 +1,6 @@
 <template>
     <div :class="{
-            'w-full max-w-4xl mx-auto p-4': !isFullScreen,
+            'w-full max-w-4xl mx-auto p-4 mb-20': !isFullScreen,
             'fixed inset-0 bg-white z-50 p-4': isFullScreen
         }" 
     >
@@ -9,9 +9,9 @@
             <table class="w-full divide-y divide-x divide-slate-200 border-collapse border m-0">
             <thead class="bg-amber-300 text-slate-800">
                 <tr @dblclick="isFullScreen = !isFullScreen">
-                <th class="px-4 py-2 bg-yellow-400 text-start border border-gray-300">سکه بانکی</th>
-                <th class="px-4 py-2 bg-yellow-400 text-start border border-gray-300">خرید</th>
-                <th class="px-4 py-2 bg-yellow-400 text-start border border-gray-300">فروش</th>
+                <th class="px-4 py-2 bg-yellow-400 border border-gray-300 text-center">{{props.category.name}}</th>
+                <th class="px-4 py-2 bg-yellow-400 border border-gray-300 text-center">خرید</th>
+                <th class="px-4 py-2 bg-yellow-400 border border-gray-300 text-center">فروش</th>
                 </tr>
             </thead>
             <tbody
@@ -22,9 +22,9 @@
                 :key="product.id"
                 class=" cursor-pointer odd:bg-white even:bg-slate-50"
                 >
-                <td class="px-4 py-2 border border-gray-300">{{ product.name }}</td>
-                <td class="px-4 py-2 border border-gray-300">{{ product.priceBuy }}</td>
-                <td class="px-4 py-2 border border-gray-300">{{ product.priceSell }}</td>
+                <td class="px-4 py-2 border border-gray-300 text-center">{{ product.name }}</td>
+                <td class="px-4 py-2 border border-gray-300 text-center">{{ product.priceBuy }}</td>
+                <td class="px-4 py-2 border border-gray-300 text-center">{{ product.priceSell }}</td>
                 </tr>
             </tbody>
             </table>
