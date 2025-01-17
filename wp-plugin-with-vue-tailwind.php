@@ -47,11 +47,11 @@ class WPPluginWithVueTailwind {
             //     'manage_options',
             //     'admin.php?page=wpp-plugin-with-vue-tailwind.php#/',
             // );
-            // $submenu['wpp-plugin-with-vue-tailwind.php']['contact'] = array(
-            //     'Contact',
-            //     'manage_options',
-            //     'admin.php?page=wpp-plugin-with-vue-tailwind.php#/contact',
-            // );
+            $submenu['wpp-plugin-with-vue-tailwind.php']['categories'] = array(
+                'دسته بندی ها',
+                'manage_options',
+                'admin.php?page=wpp-plugin-with-vue-tailwind.php#/categories',
+            );
             $submenu['wpp-plugin-with-vue-tailwind.php']['manageMent'] = array(
                 'مدیربت',
                 'manage_options',
