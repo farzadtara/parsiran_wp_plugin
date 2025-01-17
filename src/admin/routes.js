@@ -1,6 +1,6 @@
 import Management from './pages/Management.vue';
 import PriceTable from './pages/PriceTable.vue';
-import manageCategories from './pages/ManageCategories.vue'
+import ManageCategories from './pages/ManageCategories.vue'
 
 export default [
 
