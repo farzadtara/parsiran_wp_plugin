@@ -103,18 +103,26 @@ class WPPluginWithVueTailwind {
 
         add_shortcode('wpParsiran', 'render_app');
 
-        function render_app(){
+        function render_app($atts){
 
+            // $atts = shortcode_atts( array(
+            //     'categories' => 'null' // مقدار پیش‌فرض
+            // ), $atts );
+        
+            // // تبدیل رشته به آرایه
+            // $items_array = explode(',', $atts['categories']);
+        
+            // // تبدیل آرایه به JSON
+            // $json_array = json_encode($items_array);
 
-
+            // $output = '<div class="WPWVT-admin-page mt-2 short_code_wrapper" id="WPWVT_app"  data-categories="' . esc_attr($json_array) . '"   >';
             $output = '<div class="WPWVT-admin-page mt-2 short_code_wrapper" id="WPWVT_app">';
             // $output .= '<router-view></router-view>';
             $output .= '</div>';
 
             return $output;
 
-
-            // echo "<script>console.log('Debug Objects: " . $output . "', $current_user  );</script>";
+            // echo "<script>console.log('Debug Objects: " . $output . "', $atts );</script>";
 
         }
 
