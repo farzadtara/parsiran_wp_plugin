@@ -37,6 +37,7 @@
       <table class="min-w-full divide-y divide-gray-200">
         <thead class="bg-gray-50">
           <tr>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider text-center">ترتیب </th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider text-center">نام </th>
             <!-- <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role</th> -->
@@ -44,7 +45,17 @@
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
-          <tr v-for="category in categories" :key="category.id">
+          <tr 
+            v-for="category in categories"
+            :key="category.id"
+            draggable="true"
+            @dragstart="handleDragStart(category)"
+            @dragover.prevent="handleDragOver(index)"
+            @drop.prevent="handleDrop(index)"
+          >
+          <td class="px-6 py-4 whitespace-nowrap text-center" >
+            {{ category.order }}
+          </td>
             <td class="px-6 py-4 whitespace-nowrap text-center" v-if="editingItem?.id !== category.id">
               {{ category.name }}
             </td>
@@ -87,14 +98,14 @@
                     @click="startEdit(category)"
                     class="text-blue-600 hover:text-blue-900 mx-2"
                   >
-                    Edit
+                    به روز رسانی 
                   </button>
                 </template>
                 <button
                   @click="deleteItem(category.id)"
                   class="text-red-600 hover:text-red-900"
                 >
-                  Delete
+                  حذف
                 </button>
               </div>
             </td>
@@ -107,24 +118,24 @@
 
 
 <script setup>
-import { refDebounced } from '@vueuse/core'
 import { ref, onMounted } from 'vue'
 import AJAX from '../Bits/AJAX'
+import cloneDeep from 'clone-deep'
 
 const categories = ref([])
+const draggedItem = ref(null)
+const draggedOverIndex = ref(null)
 
-
-
-const items = ref([
-  { id: 1, name: 'John Doe' },
-  { id: 2, name: 'Jane Smith'  },
-])
 
 const newItem = ref({
   name: '',
+  order: 0,
+  isHidden: false
 })
 
 const editingItem = ref(null)
+
+const emit = defineEmits(['update:order'])
 
 onMounted(async ()=>{
     await fetchCategory()
@@ -162,5 +173,52 @@ async function deleteItem(id){
   await AJAX.delete(`category/${id}`)
   await fetchCategory()
 
+}
+
+function handleDragStart(item) {
+  draggedItem.value = item
+}
+
+function handleDragOver(index) {
+  draggedOverIndex.value = index
+}
+
+async function handleDrop(index) {
+  if (!draggedItem.value) return
+
+  const cloneCategory = cloneDeep(categories.value)
+
+  const fromIndex = cloneCategory.findIndex(item => item.id === draggedItem.value?.id)
+  const toIndex = index
+
+  // Remove the item from its original position
+  const [removed] = cloneCategory.splice(fromIndex, 1)
+  // Insert it at the new position
+  cloneCategory.splice(toIndex, 0, removed)
+
+  // Update order numbers and emit the new list
+  const updatedRows = cloneCategory.map((row, index) => ({
+    ...row,
+    order: index + 1
+  }))
+
+
+  categories.value = updatedRows
+  // emit('update:order', updatedRows)
+  
+  draggedItem.value = null
+  draggedOverIndex.value = null
+
+  const payload = updatedRows.map((item, index) => (
+    {
+      id: item.id,
+      order: item.order,
+    }
+  ))
+
+  console.log("payload :>> ", payload);
+  
+
+  await AJAX.put("category/order", payload );
 }
 </script>
