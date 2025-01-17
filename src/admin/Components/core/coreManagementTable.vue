@@ -126,8 +126,6 @@ function handleDrop(index) {
 
 
   currentProducts.value = updatedRows
-  console.log('updatedRows :>> ', updatedRows);
-  console.log('currentProducts.value :>> ', currentProducts.value);
   emit('update:order', updatedRows)
 
   draggedItem.value = null
