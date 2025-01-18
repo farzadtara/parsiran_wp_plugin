@@ -1,10 +1,10 @@
 <template>
     <div :class="{
-            'w-full max-w-4xl mx-auto p-4 mb-20': !isFullScreen,
+            'w-full text-xl font-medium	 mx-auto p-4 mb-20': !isFullScreen,
             'fixed inset-0 bg-white z-50 p-4': isFullScreen
         }" 
     >
-        <span class="block text-xl font-bold mb-2">{{ props.category.name }} </span>
+        <span class="block text-2xl font-bold mb-2">{{ props.category.name }} </span>
         <div class="w-full border border-slate-200 rounded-xl overflow-x-auto">
             <table class="w-full divide-y divide-x divide-slate-200 border-collapse border m-0">
             <thead class="bg-amber-300 text-slate-800">
@@ -29,11 +29,14 @@
             </tbody>
             </table>
         </div>
+        <!-- <span class="mt-1">آخرین به روز سانی در : {{ lastUpdateDate }}</span> -->
         </div>
 </template>
 
 <script setup>
-import { ref, watch } from 'vue' 
+import { ref, watch, computed } from 'vue'
+import { remainingTime } from "@persian-tools/persian-tools";
+
 
 const isFullScreen = ref(false) 
 
@@ -47,6 +50,12 @@ const props = defineProps({
         required: true
     }
 })
+
+// const lastUpdateDate = computed(() => {
+//     const date = props.products ?  props.products.map(product => product.updated_at).sort().reverse()[0] : ''
+//     console.log('remainingTime(date) :>> ',date, remainingTime(date));
+//     return date 
+// })
 
 
 
